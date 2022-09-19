@@ -12,18 +12,19 @@
 
 export class Task {
   constructor(taskName, timer = 0) {
-    this.id = String(performance.now()).replace('.', '');
-    this.taskName = String(taskName);
-    this.timer = Number(timer);
-  }
-
-  changeTimer() {
-    return (this.timer += 1);
+    this._id = String(performance.now()).replace('.', '');
+    this._taskName = String(taskName);
+    this._timer = Number(timer);
+    Object.seal(this);
   }
 
   setTaskName(taskName) {
-    this.taskName = taskName;
+    this._taskName = taskName;
     return this;
+  }
+
+  changeTimer() {
+    return (this._timer += 1);
   }
 }
 
