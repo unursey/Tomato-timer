@@ -1,34 +1,27 @@
-// Ваша задача создать класс для реализации задачи
-// Принимает параметры название и счетчик (по умолчанию 0)
-// Полученный объект должен иметь:
+import { Tomato } from "./modules/tomato";
+import { Task } from "./modules/task";
 
-// 1) уникальный ID (string)
-// 2) название (string)
-// 3) счетчик (number)
+export const init = () => {
 
-// методы:
-// 1) Изменить значение счетчика (+1)
-// 2) Изменить имя
+  const taskOne = new Task('Постирать посуду', 3);
+  console.log('taskOne: ', taskOne);
 
-export class Task {
-  constructor(taskName, timer = 0) {
-    this._id = String(performance.now()).replace('.', '');
-    this._taskName = String(taskName);
-    this._timer = Number(timer);
-    Object.seal(this);
-  }
+  const taskTwo = new Task('Помыть одежду');
+  console.log('taskTwo: ', taskTwo);
 
-  setTaskName(taskName) {
-    this._taskName = taskName;
-    return this;
-  }
+  const tomatoTask = new Tomato();
 
-  changeTimer() {
-    return (this._timer += 1);
-  }
-}
+  tomatoTask.addTask(taskOne);
+  tomatoTask.addTask(taskTwo);
 
+  tomatoTask.showTasks();
 
+  tomatoTask.setActiveTask(1);
+
+  tomatoTask.startTask();
+};
+
+init();
 
 
 export const one = () => {
