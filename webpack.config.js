@@ -18,7 +18,18 @@ module.exports = {
     filename: "[name][contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: "assets/[hash][ext][query]",
+    assetModuleFilename: 
+    pathData => {
+      const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
+      return `${filepath}/[name][ext]`;
+  },
+    
+    //"assets/[hash][ext][query]",
+  },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -44,11 +55,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|jpeg|png|svg|gif)/i,
+        test: /\.(jpg|jpeg|png|svg|gif)$/i,
         type: "asset/resource",
       },
       {
-        test: /\.(woff2|woff|eot|ttf|otf)/i,
+        test: /\.(woff2|woff|eot|ttf|otf)$/i,
         type: "asset/resource",
       },
       {
