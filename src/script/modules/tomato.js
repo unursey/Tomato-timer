@@ -1,20 +1,40 @@
 export class Tomato {
   #timer;
-  constructor(options = {}) {
+  constructor(page, options = {}) {
+    if (Tomato._instance) {
+      return Tomato._instance;
+    }
     this.taskTime = options.taskTime || 25;
     this.shortBreak = options.shortBreak || 5;
     this.longBreak = options.longBreak || 15;
     this.tasks = options.tasks || [];
     this.activeTask = null;
     this.#timer = 0;
+    this.page = page;
+    Tomato._instance = this;
   }
 
   addTask(task) {
     this.tasks.push(task);
+    this.page.createTask({
+      id: task._id,
+      taskName: task._taskName,
+      important: task._importance,
+      count: this.tasks.length,
+    });
   }
 
   setActiveTask(id) {
-    this.activeTask = this.tasks[id];
+    
+    let i;
+    let task = this.tasks.find((item, index) => {         
+      if (item._id === id) {
+        this.activeTask = item;
+        i = index + 1; 
+        return item};
+    });
+ 
+    this.page.setTitle(task._taskName, i, this.taskTime)   
   }
 
   startTask() {
