@@ -1,8 +1,7 @@
 import { AddNewTask } from "./task";
 
 export class ControllerTomato {
-  constructor(page, tomato) {
-    this.page = page;
+  constructor(tomato) {
     this.tomato = tomato;
     this.btnAddTask = document.querySelector(".task-form__add-button");
     this.taskTitle = document.querySelector(".task-name");
@@ -11,6 +10,7 @@ export class ControllerTomato {
     this.btnStop = document.querySelector(".button-stop");
     this.count = 0;
     this.importanceList = ["default", "important", "so-so"];
+    this.tasksList = document.querySelector(".pomodoro-tasks__quest-tasks");
     this.init();
   }
 
@@ -22,7 +22,7 @@ export class ControllerTomato {
       this.addTask();
     });
 
-    this.page.tasksList.addEventListener("click", (e) => {
+    this.tasksList.addEventListener("click", (e) => {
       if (e.target.classList.contains("pomodoro-tasks__task-text")) {
         this.tomato.setActiveTask(
           e.target.closest(".pomodoro-tasks__list-task").dataset.id

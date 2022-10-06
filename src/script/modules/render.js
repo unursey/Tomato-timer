@@ -1,5 +1,4 @@
 import { el, setChildren } from "redom";
-import image from '../image'
 
 export class RenderTomato {
   constructor() {

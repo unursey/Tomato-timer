@@ -1,11 +1,12 @@
 import { Tomato } from "./modules/tomato";
 import { RenderTomato } from "./modules/render";
 import { ControllerTomato } from "./modules/controller";
+import '../img/svg/noto_tomato.svg';
 
 export const init = () => {
   const page = new RenderTomato();
   const tomato = new Tomato(page);
-  const controllerTomato = new ControllerTomato(page, tomato);
+  const controllerTomato = new ControllerTomato(tomato);
 };
 
 init();
